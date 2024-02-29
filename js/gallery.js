@@ -71,32 +71,17 @@ gallery.innerHTML = createMarkup(images);
 gallery.addEventListener("click", handleClick);
 
 function handleClick(event) {
-  if (event.currentTarget === event.target) return;
-
   event.preventDefault();
+
+  if (event.currentTarget === event.target) return;
 
   const currentImage = event.target.dataset.source;
 
-  const image = images.find(({ original }) => original === currentImage);
-
-  console.log(image);
-
   const instance = basicLightbox.create(
     `
-    <div class = "backdrop"> <div class="modal">
-    <img src="${image.original}"/>
-    <p class= "description">${image.description}</p>
-    <button class = "close-btn">Close</button>
-    </div></div>
- 
-`,
-    {
-      onShow: (instance) => {
-        instance.element().querySelector("button").onclick = instance.close;
-      },
-    }
+		<img src=${currentImage}>
+	`
   );
-
   instance.show();
 }
 
